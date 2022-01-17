@@ -1,0 +1,46 @@
+
+comando para multicolinialidad (indice de condicion)
+
+create
+data x1 x2 x3 x4
+group group02 1 x2 x3 x4 x5 x6
+sym xx=@inner(group02)
+vector vp=@eigenvalues(xx)
+vector v=@getmaindiagonal(xx)
+sym md=@makediagonal(v)
+sym s=@inverse(sqr(md))
+sym xxn=s*xx*s
+vector vp2=@eigenvalues(xxn)
+scalar ic=(vp2mayor/vp2mennor)^(0.5)
+
+
+Generar una variable en valor avsoluto de los residuos
+genr vae=@abs(resid)  
+
+pruevas para heterocedastesidad
+
+1. breush pagan godfrey
+
+ls y c x2 x3
+genr e=resid
+genr e2=e*e
+scalar scr=@sum(e2)
+scalar var=scr/18
+genr pi=e2/var
+ls pi c x2 x3................................   copiar  en grupo y llevar al excel y analiside datos 
+.............................................y chi*2(SUMAS DE CUADRAS/2) luego distri.t. DC,2
+scalar sct=(2.114524*2.114524)*17
+scalar sce=0.52313*sct
+scalar chi=sce/2
+scalar pr=1-@cchisq(chi,2)
+  
+
+kfoef baset
+ls y c x2 x3
+seleccionas forcast
+genr yf2=yf*yf
+ls e2 c yf2
+
+
+
+
